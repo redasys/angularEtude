@@ -4,5 +4,14 @@
         "navbars"
     ],
     "editor.formatOnPaste": true,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "cSpell.ignoreWords": [
+        "alertify",
+        "alertifyjs",
+        "build",
+        "js",
+        "min",
+        "modules",
+        "node"
+    ]
 }
