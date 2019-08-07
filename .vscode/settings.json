@@ -9,10 +9,12 @@
         "alertify",
         "alertifyjs",
         "build",
+        "downlevel",
         "dropdown",
         "js",
         "min",
         "modules",
-        "node"
+        "node",
+        "tabset"
     ]
 }

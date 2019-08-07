@@ -63,7 +63,7 @@ namespace DatingApp.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                // seeder.SeedUsers();
+                 seeder.SeedUsers();
             }
             else
             {
