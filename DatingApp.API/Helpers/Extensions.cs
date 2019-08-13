@@ -1,6 +1,8 @@
 using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace DatingApp.API.Helpers
 {
@@ -25,9 +27,27 @@ namespace DatingApp.API.Helpers
             return age;
         }
 
-        public static void ResolveUsing<TSource, TDestination, TMember, TResult>(this IMemberConfigurationExpression<TSource, TDestination, TMember> member, 
-        Func<TSource, TResult> resolver) {
+        public static void ResolveUsing<TSource, TDestination, TMember, TResult>(this IMemberConfigurationExpression<TSource, TDestination, TMember> member,
+        Func<TSource, TResult> resolver)
+        {
             member.MapFrom((Func<TSource, TDestination, TResult>)((src, dest) => resolver(src)));
+        }
+
+        public static void AddPagination(this HttpResponse response, int currentPage, int itemsPerPage, int totalItems, int totalPages)
+        {
+            var pagedHeader = new PaginationHeader(currentPage, itemsPerPage, totalItems, totalPages);
+
+            var ccFormatter = new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+            response.Headers.Add("Pagination", JsonConvert.SerializeObject(pagedHeader, ccFormatter));
+            response.Headers.Add("Access-Control-Expose-Headers", "Pagination");
+        }
+
+        public static bool IsNullOrEmpty(this string value)
+        {
+            return string.IsNullOrEmpty(value);
         }
     }
 }
